@@ -2,11 +2,24 @@ import pandas as pd
 import time
 import requests
 
+import yaml
+
+with open("bot_config.yaml", 'r') as stream:
+    try:
+        config = yaml.safe_load(stream)
+    except yaml.YAMLError as exc:
+        print(exc)
+
+
+bot_token = config["telegram"]["bot_token"]
+bot_chatID = config["telegram"]["bot_chat_id"]
+
+worldcoin_key = config["api_keys"]["worldcoin_key"]
+weather_api_key = config["api_keys"]["weather_api_key"]
+
 
 def telegram_bot_sendtext(bot_message):
 
-    bot_token = '765976228:AAFG2LpVm26q7yys1WeZF5fdbyl84bye2TE'
-    bot_chatID = '685157744'
     send_text = 'https://api.telegram.org/bot' + bot_token + \
         '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
 
@@ -16,7 +29,7 @@ def telegram_bot_sendtext(bot_message):
 
 
 worldcoinindex = requests.get(
-    "https://www.worldcoinindex.com/apiservice/v2getmarkets?key=UgFCk4Ee6sVAHjKveMe8mzWwVrDboQ&fiat=usd")
+    "https://www.worldcoinindex.com/apiservice/v2getmarkets?key={}&fiat=usd".format(worldcoin_key))
 
 markets = worldcoinindex.json()["Markets"][0]
 
@@ -48,7 +61,7 @@ for i, row in df_coins_to_sent.iterrows():
 
 res = telegram_bot_sendtext(message)
 
-weather_api_key = "df2a9f94e5e9c1436fe3cbc0cb150e53"
+
 weather = requests.get(
     "http://api.openweathermap.org/data/2.5/forecast/hourly?q=Ljubljana,si&mode=json&APPID="+weather_api_key)
 
