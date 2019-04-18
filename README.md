@@ -5,10 +5,10 @@ Change this in kube_deploy.yaml
   to schedule as you wish.
 
 #### Config yaml example
-* telegram:
-  * bot_token: '765976228:AAFG2LpVm26q7yys1WeZF5fdbyl84bye2TE'
-  * bot_chat_id: '685157744'
+telegram:
+  bot_token: '*******'
+  bot_chat_id: '*******'
 
-* api_keys:
-  * worldcoin_key: "UgFCk4Ee6sVAHjKveMe8mzWwVrDboQ"
-  * weather_api_key: "df2a9f94e5e9c1436fe3cbc0cb150e53"
+api_keys:
+  worldcoin_key: "********"
+  weather_api_key: "********"
