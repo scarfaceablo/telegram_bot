@@ -1,0 +1,14 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: news
+spec:
+  schedule: "30 7,19 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: news
+            image: gcr.io/seraphic-shell-202415/news:0.1
+          restartPolicy: OnFailure
