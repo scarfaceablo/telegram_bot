@@ -10,5 +10,5 @@ spec:
         spec:
           containers:
             - name: news
-              image: gcr.io/seraphic-shell-202415/news:0.1
+              image: gcr.io/intricate-mix-237607/news:0.1
           restartPolicy: OnFailure
